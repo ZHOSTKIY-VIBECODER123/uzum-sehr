@@ -1,0 +1,33 @@
+# Ежедневная копия базы. Нужен секрет SUPABASE_DB_URL и ключ шифрования BACKUP_PASSPHRASE.
+name: Database backup
+
+on:
+  schedule:
+    - cron: "0 22 * * *"
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -yq postgresql-client
+
+      - name: Dump and encrypt
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          pg_dump "$SUPABASE_DB_URL" --schema=public --schema=app_private --no-owner --no-privileges \
+            | gzip \
+            | gpg --batch --symmetric --cipher-algo AES256 --passphrase "$BACKUP_PASSPHRASE" \
+            > backup.sql.gz.gpg
+
+      # В копии данные детей, поэтому файл зашифрован и хранится 14 дней.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: db-backup-${{ github.run_id }}
+          path: backup.sql.gz.gpg
+          retention-days: 14

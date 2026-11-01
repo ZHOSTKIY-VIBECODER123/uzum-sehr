@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night: #080d27;
+  --color-night-2: #0e1436;
+  --color-plum: #28105c;
+  --color-violet: #8538e8;
+  --color-violet-soft: #b98cff;
+  --color-lime: #a8f000;
+  --color-lime-soft: #d4ff6a;
+  --color-warm: #ffc46b;
+  --color-mist: #b9bdd6;
+  --color-haze: #7f85a8;
+  --color-card: #f3f0fb;
+  --color-ink: #1b1238;
+  --color-ink-soft: #57507a;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-display: var(--font-unbounded), var(--font-manrope), sans-serif;
+}
+
+html,
+body {
+  background: var(--color-night);
+  color: #fff;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-lime);
+  color: var(--color-night);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-lime);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Ночное небо страниц без 3D: звёзды рисуются фоном и не нагружают устройство. */
+.night-sky {
+  background-color: var(--color-night);
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 22%, #ffffffcc, transparent 60%),
+    radial-gradient(1px 1px at 28% 68%, #ffffff99, transparent 60%),
+    radial-gradient(1.6px 1.6px at 41% 13%, #ffe9c4cc, transparent 60%),
+    radial-gradient(1px 1px at 57% 44%, #ffffff88, transparent 60%),
+    radial-gradient(1.3px 1.3px at 69% 79%, #ffffffaa, transparent 60%),
+    radial-gradient(1px 1px at 83% 26%, #d6ddffaa, transparent 60%),
+    radial-gradient(1.5px 1.5px at 93% 61%, #ffffffbb, transparent 60%),
+    radial-gradient(60% 45% at 78% 8%, #28105c99, transparent 70%),
+    radial-gradient(55% 50% at 8% 88%, #28105c80, transparent 70%);
+  background-size: 420px 420px, 380px 380px, 520px 520px, 300px 300px, 460px 460px, 340px 340px, 560px 560px, 100% 100%, 100% 100%;
+  background-attachment: fixed;
+}
+
+.hero-sky {
+  background:
+    radial-gradient(46% 62% at 50% 62%, #2d1a7a66, transparent 72%),
+    radial-gradient(70% 55% at 88% 10%, #28105c88, transparent 72%),
+    radial-gradient(60% 55% at 6% 92%, #28105c70, transparent 72%),
+    linear-gradient(180deg, #060a20, #080d27 52%, #0b0b2c);
+}
+
+.glass {
+  background: linear-gradient(160deg, #ffffff12, #ffffff06);
+  border: 1px solid #ffffff1c;
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+}
+
+.btn-lime {
+  background: var(--color-lime);
+  color: #12150a;
+  box-shadow: 0 0 0 1px #d4ff6a55, 0 10px 34px -8px #a8f00088;
+  transition: transform 0.18s ease, box-shadow 0.25s ease, background 0.2s ease;
+}
+.btn-lime:hover:not(:disabled) {
+  background: var(--color-lime-soft);
+  box-shadow: 0 0 0 1px #d4ff6a99, 0 12px 44px -6px #a8f000cc;
+  transform: translateY(-1px);
+}
+.btn-lime:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+}
+.btn-lime:disabled {
+  opacity: 0.55;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.tree-canvas {
+  position: absolute !important;
+  inset: 0;
+  touch-action: none;
+}
+.tree-canvas canvas {
+  cursor: grab;
+  touch-action: none;
+}
+.tree-canvas canvas:active {
+  cursor: grabbing;
+}
+
+.bulb-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 15;
+  pointer-events: none;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #0b0f2ee6;
+  border: 1px solid #ffffff2e;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.14s ease;
+}
+.bulb-tooltip[data-visible="1"] {
+  opacity: 1;
+}
+
+.flat-bulb {
+  transition: transform 0.15s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.flat-bulb:hover {
+  transform: scale(1.35);
+}
+
+/* Провод гирлянды на странице инструкции. */
+.garland-wire {
+  background: linear-gradient(180deg, transparent, #ffffff2e 6%, #ffffff2e 94%, transparent);
+}
+
+.prose-lines {
+  white-space: pre-line;
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff33 transparent;
+}
+
+.admin-input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #ffffff24;
+  background: #ffffff0a;
+  padding: 9px 12px;
+  font-size: 14px;
+  color: #fff;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.admin-input:focus {
+  outline: none;
+  border-color: var(--color-lime);
+  background: #ffffff10;
+}
+.admin-input::placeholder {
+  color: var(--color-haze);
+}
+select.admin-input option {
+  background: var(--color-night-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
