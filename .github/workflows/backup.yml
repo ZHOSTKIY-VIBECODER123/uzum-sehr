@@ -9,7 +9,7 @@ on:
 
 jobs:
   backup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
       BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
@@ -29,6 +29,8 @@ jobs:
         if: steps.secrets.outputs.configured == 'true'
         shell: bash
         run: |
+          sudo apt-get update -q
+          sudo apt-get install -yq postgresql-common
           sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
           sudo apt-get install -yq postgresql-client-17
 
