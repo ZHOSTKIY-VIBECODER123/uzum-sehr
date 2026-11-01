@@ -3,7 +3,7 @@
 import { ArrowDown, ArrowUp, ImagePlus, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { humanError, rpc } from "@/lib/api";
-import { supabaseBrowser } from "@/lib/supabase/browser";
+import { STATIC_DEMO, supabaseBrowser } from "@/lib/supabase/browser";
 import type { Banner, HowStep, Settings } from "@/lib/types";
 import { AdminTitle, Field, GhostButton, Notice, Panel, PrimaryButton } from "./AdminShell";
 
@@ -65,7 +65,14 @@ export function ContentAdmin({ initial }: { initial: Settings }) {
       setUploadError(error.message);
       return;
     }
-    const url = client.storage.from("site-assets").getPublicUrl(path).data.publicUrl;
+    // В демо файл не лежит на сервере, поэтому картинка хранится прямо в настройке.
+    const url = STATIC_DEMO
+      ? await new Promise<string>((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(String(reader.result));
+          reader.readAsDataURL(file);
+        })
+      : client.storage.from("site-assets").getPublicUrl(path).data.publicUrl;
     const next = { items: [...banners.value.items, { url, title: file.name.replace(/\.\w+$/, "") }] };
     banners.setValue(next);
     await banners.save(next);

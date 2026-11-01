@@ -8,6 +8,8 @@ import type { MyBooking, MyProfile, TreeData } from "./types";
 
 export const BOOKINGS_EVENT = "sehr:bookings-changed";
 const DEMO = process.env.NEXT_PUBLIC_DEMO_MODE === "1";
+// В демо для Pages база своя у каждого браузера, поэтому чужих изменений ждать неоткуда.
+const POLL_MS = DEMO && process.env.NEXT_PUBLIC_STATIC_DEMO !== "1" ? 3000 : 60000;
 
 export function useUser() {
   const [user, setUser] = useState<User | null>(null);
@@ -65,7 +67,7 @@ export function useTree(initial: TreeData) {
           .subscribe();
 
     // Запасной опрос на случай обрыва Realtime.
-    const poll = setInterval(refresh, DEMO ? 3000 : 60000);
+    const poll = setInterval(refresh, POLL_MS);
     const onVisible = () => {
       if (document.visibilityState === "visible") refresh();
     };

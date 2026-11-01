@@ -36,6 +36,10 @@ export async function signedUrl(client: SupabaseClient, path: string): Promise<s
   if (cached && cached.until > Date.now()) return cached.url;
   const { data } = await client.storage.from("wish-media").createSignedUrl(path, 3600);
   if (!data?.signedUrl) return null;
-  signedCache.set(path, { url: data.signedUrl, until: Date.now() + 50 * 60 * 1000 });
-  return data.signedUrl;
+  const url = process.env.NEXT_PUBLIC_STATIC_DEMO === "1"
+    ? await (await import("./demo/backend")).demoFileUrl("wish-media", path)
+    : data.signedUrl;
+  if (!url) return null;
+  signedCache.set(path, { url, until: Date.now() + 50 * 60 * 1000 });
+  return url;
 }

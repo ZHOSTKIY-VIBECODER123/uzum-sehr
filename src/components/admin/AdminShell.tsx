@@ -4,7 +4,7 @@ import { FileSpreadsheet, Gauge, Gift, History, LogOut, MessageSquare, PanelsTop
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useContext } from "react";
-import { supabaseBrowser } from "@/lib/supabase/browser";
+import { supabaseBrowser, withBase } from "@/lib/supabase/browser";
 import type { AdminRole } from "@/lib/types";
 
 const RoleContext = createContext<AdminRole>("admin");
@@ -29,7 +29,7 @@ export function AdminShell({ role, email, children }: { role: AdminRole; email: 
 
   const signOut = async () => {
     await supabaseBrowser().auth.signOut();
-    window.location.assign("/");
+    window.location.assign(withBase("/"));
   };
 
   return (
