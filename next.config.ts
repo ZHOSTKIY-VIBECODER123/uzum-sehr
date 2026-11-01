@@ -20,4 +20,17 @@ const config: NextConfig = {
   },
 };
 
-export default config;
+// Статическое демо для GitHub Pages: собираются только файлы *.demo.tsx, сервер не нужен.
+const staticDemo: NextConfig = {
+  reactStrictMode: true,
+  transpilePackages: ["three"],
+  devIndicators: false,
+  agentRules: false,
+  output: "export",
+  distDir: "dist-pages",
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+  pageExtensions: ["demo.tsx", "demo.ts"],
+  images: { unoptimized: true },
+};
+
+export default process.env.NEXT_PUBLIC_STATIC_DEMO === "1" ? staticDemo : config;

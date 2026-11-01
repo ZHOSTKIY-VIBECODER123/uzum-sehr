@@ -11,7 +11,7 @@ import { MediaList, Sheet } from "@/components/wish/WishSheet";
 import { humanError, rpc } from "@/lib/api";
 import { ageLabel, formatDate, formatDateTime, plural } from "@/lib/format";
 import { useMyBookings, useUser } from "@/lib/hooks";
-import { supabaseBrowser } from "@/lib/supabase/browser";
+import { supabaseBrowser, withBase } from "@/lib/supabase/browser";
 import type { MyBooking, MyProfile } from "@/lib/types";
 
 function StatusChip({ booking }: { booking: MyBooking }) {
@@ -159,7 +159,7 @@ export function MyDeeds({ dropOff }: { dropOff: string }) {
   const count = bookings.length;
   const signOut = async () => {
     await supabaseBrowser().auth.signOut();
-    window.location.assign("/");
+    window.location.assign(withBase("/"));
   };
 
   return (

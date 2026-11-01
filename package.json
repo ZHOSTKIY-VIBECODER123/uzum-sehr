@@ -11,7 +11,9 @@
     "test": "vitest run",
     "demo:backend": "node scripts/local-supabase.mjs",
     "demo": "node scripts/demo.mjs",
-    "seed:demo": "node scripts/generate-demo-seed.mjs"
+    "seed:demo": "node scripts/generate-demo-seed.mjs",
+    "build:pages": "node scripts/build-pages.mjs",
+    "publish:pages": "node scripts/publish-pages.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
