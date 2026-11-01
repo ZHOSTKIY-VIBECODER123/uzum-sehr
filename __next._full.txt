@@ -1,0 +1,32 @@
+1:"$Sreact.fragment"
+2:"/uzum-sehr/_next/static/chunks/2uypqdep1f3ov.js"
+3:"/uzum-sehr/_next/static/chunks/2_nzmtev5fn3_.js"
+4:I[39756,["$2","$3"],"default"]
+5:"/uzum-sehr/_next/static/chunks/1y0btjspw62zi.js"
+6:I[33967,["$5"],"default"]
+7:I[37457,["$2","$3"],"default"]
+8:"/uzum-sehr/_next/static/chunks/2n5qeheznvl4u.js"
+9:I[22016,["$8"],""]
+a:I[56865,["$2","$3"],"DemoBanner"]
+c:I[47257,["$2","$3"],"ClientPageRoot"]
+d:"/uzum-sehr/_next/static/chunks/32csb9w27z15q.js"
+e:"/uzum-sehr/_next/static/chunks/0r9h9cp8m7nwo.js"
+f:"/uzum-sehr/_next/static/chunks/1pvzdfvkz9yd1.js"
+10:"/uzum-sehr/_next/static/chunks/22os22go3rtuz.js"
+11:I[36574,["$d","$e","$3","$f","$10"],"default"]
+14:I[97367,["$2","$3"],"OutletBoundary"]
+15:"$Sreact.suspense"
+17:"ViewportBoundary"
+18:I[97367,["$2","$3"],"$17"]
+1a:"MetadataBoundary"
+1b:I[97367,["$2","$3"],"$1a"]
+1d:I[68027,[],"default",1]
+:HL["/uzum-sehr/_next/static/chunks/2hkg8sb00ld1a.css","style"]
+b:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":[["$","$Lc",null,{"Component":"$11","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@12","$@13"]}}],[["$","script","script-0",{"src":"/uzum-sehr/_next/static/chunks/32csb9w27z15q.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/uzum-sehr/_next/static/chunks/0r9h9cp8m7nwo.js","async":true,"nonce":"$undefined"}],["$","script","script-2",{"src":"/uzum-sehr/_next/static/chunks/1pvzdfvkz9yd1.js","async":true,"nonce":"$undefined"}],["$","script","script-3",{"src":"/uzum-sehr/_next/static/chunks/22os22go3rtuz.js","async":true,"nonce":"$undefined"}]],["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]]}],"p":false,"v":null}}]]
+0:{"P":null,"c":["",""],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/uzum-sehr/_next/static/chunks/2hkg8sb00ld1a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/uzum-sehr/_next/static/chunks/2uypqdep1f3ov.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/uzum-sehr/_next/static/chunks/2_nzmtev5fn3_.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"ru","className":"ZFuH0q_variable G8leRW_variable","children":["$","body",null,{"children":[["$","$L4",null,{"parallelRouterKey":"children","error":"$6","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/uzum-sehr/_next/static/chunks/1y0btjspw62zi.js","async":true,"nonce":"$undefined"}]],"template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","main",null,{"className":"night-sky grid min-h-dvh place-items-center px-6 text-center","children":["$","div",null,{"className":"max-w-md","children":[["$","p",null,{"className":"font-display text-5xl font-medium text-lime","children":"404"}],["$","p",null,{"className":"mt-4 text-lg text-mist","children":"Такой страницы нет, зато на ёлке ещё много огоньков."}],["$","$L9",null,{"href":"/","className":"btn-lime mt-6 inline-block rounded-2xl px-7 py-3.5 font-extrabold","children":"К ёлке"}]]}]}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","$La",null,{}]]}]}]]}],"p":false,"v":null},"c":"$Qb"},"h":{"r":["$","$1","h",{"children":[null,["$","$L18",null,{"children":"$L19"}],["$","$L1b",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$15",null,{"name":"Next.Metadata","children":"$L1c"}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":false,"v":null}},"m":"$undefined","G":["$1d",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"xUPRwW0xqriwomM1NBsft"}
+12:{}
+13:"$b:0:1:d:r:props:children:0:props:serverProvidedParams:params"
+19:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1, viewport-fit=cover"}],["$","meta","2",{"name":"theme-color","content":"#080d27"}]]
+1e:I[27201,["$2","$3"],"IconMark"]
+16:null
+1c:[["$","title","0",{"children":"Uzum sehr — Исполни мечту! Зажги огонь на ёлке"}],["$","meta","1",{"name":"description","content":"Одна лампочка — одна детская мечта — одно доброе дело."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/uzum-sehr/icon.svg?icon.00e8bx-07213t.svg","sizes":"any","type":"image/svg+xml"}],["$","$L1e","4",{}]]
