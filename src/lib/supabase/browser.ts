@@ -9,7 +9,7 @@ export function supabaseBrowser(): SupabaseClient {
   client ??= createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    // Условие записано прямо здесь, чтобы код демо не попадал в сборку для Supabase.
+    // В сборке для Supabase этот флаг выключен, поэтому код демо не загружается и не выполняется.
     process.env.NEXT_PUBLIC_STATIC_DEMO === "1"
       ? { global: { fetch: async (input, init) => (await import("@/lib/demo/backend")).demoFetch(input, init) } }
       : undefined,
