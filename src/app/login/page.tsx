@@ -1,6 +1,7 @@
 import { AuthPanel } from "@/components/auth/AuthPanel";
 import { PageShell } from "@/components/site/Header";
 import { getContent } from "@/lib/content";
+import { safePath } from "@/lib/safe-path";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Вход — Uzum sehr" };
@@ -8,7 +9,7 @@ export const metadata = { title: "Вход — Uzum sehr" };
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string; error?: string }> }) {
   const { next, error } = await searchParams;
   const { settings } = await getContent();
-  const target = next?.startsWith("/") && !next.startsWith("//") ? next : "/my";
+  const target = safePath(next);
   return (
     <PageShell title={settings.general.project_title}>
       <div className="mx-auto max-w-md">

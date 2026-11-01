@@ -1,7 +1,9 @@
 "use client";
 
+import { safePath } from "@/lib/safe-path";
 import { AuthForm } from "./AuthForm";
 
 export function AuthPanel({ next }: { next: string }) {
-  return <AuthForm next={next} onDone={() => window.location.assign(next)} />;
+  const target = safePath(next);
+  return <AuthForm next={target} onDone={() => window.location.assign(target)} />;
 }
