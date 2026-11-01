@@ -1,4 +1,5 @@
 # Ежедневная копия базы. Нужен секрет SUPABASE_DB_URL и ключ шифрования BACKUP_PASSPHRASE.
+# Пока секреты не заданы, запуск пропускается и завершается успешно.
 name: Database backup
 
 on:
@@ -8,26 +9,47 @@ on:
 
 jobs:
   backup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    env:
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+      BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
     steps:
+      - name: Check secrets
+        id: secrets
+        shell: bash
+        run: |
+          if [ -n "$SUPABASE_DB_URL" ] && [ -n "$BACKUP_PASSPHRASE" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Бэкап пропущен: не заданы секреты SUPABASE_DB_URL и BACKUP_PASSPHRASE."
+          fi
+
+      # pg_dump не работает с сервером новее себя, поэтому ставим клиент из репозитория PostgreSQL.
       - name: Install PostgreSQL client
+        if: steps.secrets.outputs.configured == 'true'
+        shell: bash
         run: |
           sudo apt-get update -q
-          sudo apt-get install -yq postgresql-client
+          sudo apt-get install -yq postgresql-common
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          sudo apt-get install -yq postgresql-client-17
 
+      # shell: bash включает pipefail: сбой pg_dump роняет шаг и не даёт сохранить пустую копию.
       - name: Dump and encrypt
-        env:
-          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
-          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        if: steps.secrets.outputs.configured == 'true'
+        shell: bash
         run: |
-          pg_dump "$SUPABASE_DB_URL" --schema=public --schema=app_private --no-owner --no-privileges \
+          /usr/lib/postgresql/17/bin/pg_dump "$SUPABASE_DB_URL" --schema=public --schema=app_private --no-owner --no-privileges \
             | gzip \
-            | gpg --batch --symmetric --cipher-algo AES256 --passphrase "$BACKUP_PASSPHRASE" \
-            > backup.sql.gz.gpg
+            | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 3 --symmetric --cipher-algo AES256 \
+                --output backup.sql.gz.gpg 3<<<"$BACKUP_PASSPHRASE"
 
       # В копии данные детей, поэтому файл зашифрован и хранится 14 дней.
-      - uses: actions/upload-artifact@v4
+      - name: Upload backup
+        if: steps.secrets.outputs.configured == 'true'
+        uses: actions/upload-artifact@v4
         with:
           name: db-backup-${{ github.run_id }}
           path: backup.sql.gz.gpg
+          if-no-files-found: error
           retention-days: 14
